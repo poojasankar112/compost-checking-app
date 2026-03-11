@@ -1,79 +1,75 @@
-import tkinter as tk
+<!DOCTYPE html>
+<html lang="en">
 
-# Data
-compostable = [
-    "banana peel", "apple core", "orange peel", "egg shells",
-    "coffee grounds", "tea bags", "vegetable scraps",
-    "paper towel", "leaves", "grass"
-]
+<head>
+    <meta charset="UTF-8">
+    <title>Compost Checker App</title>
+</head>
+<style>
+    body {
+        background-color: rgb(216, 238, 144);
+        font-family: Arial;
+    }
 
-not_compostable = [
-    "plastic", "glass", "metal", "styrofoam",
-    "plastic bag", "rubber", "aluminum foil","cardboard"
-]
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        padding: 30px;
+        background-color: rgb(255, 255, 255);
+        border: 3px solid black;
+        border-radius: 10px;
+        text-align: center;
+    }
 
-def check_item():
-    item = entry.get().lower()
+    #resultBox {
+        margin-top: 20px;
+        padding: 15px;
+        border: 2px solid black;
+    }
+</style>
 
-    if item in compostable:
-        result_label.config(text="✅ Compostable!", fg="#2ecc71")
-    elif item in not_compostable:
-        result_label.config(text="❌ Not Compostable", fg="#e74c3c")
-    else:
-        result_label.config(text="⚠️ Item not in database", fg="#f39c12")
+<body>
 
-# Window
-root = tk.Tk()
-root.title("Compost Checking App")
-root.geometry("300x300")
-root.configure(bg="#e8f5e9")
 
-# Title
-title = tk.Label(
-    root,
-    text="🌱 Compost Checker",
-    font=("Helvetica", 22, "bold"),
-    bg="#e8f5e9",
-    fg="#2c3e50"
-)
-title.pack(pady=20)
 
-label = tk.Label(root, 
-                 text="Please enter the material you are composting!",
-                 font=("Helvetica",10),
-                 bg="#e8f5e9",
-                 fg="#2c3e50"
-)
-label.pack(pady=10)
-# Input box
-entry = tk.Entry(
-    root,
-    font=("Helvetica", 14),
-    width=25,
-    justify="center"
-)
-entry.pack(pady=10)
+    <script>
+        let compostList = ["banana peel", "apple core", "orange peel", "egg shells", "coffee ground", "tea bag", "vegetable scrap", "vegetable peel", "paper towel", "leaf", "grass", "banana", "apple", "pear", "coffee"]
+    </script>
+    <script>
+        let noncompostList = ["plastic", "glass", "metal", "styrofoam", "plastic bag", "rubber", "aluminum foil", "cardboard", "cup", "plate"]
+    </script>
 
-# Button
-check_button = tk.Button(
-    root,
-    text="Check Item",
-    font=("Helvetica", 12, "bold"),
-    bg="#27ae60",
-    fg="white",
-    padx=20,
-    pady=5,
-    command=check_item
-)
-check_button.pack(pady=10)
+    <script>
+        function checkMaterial() {
 
-# Result
-result_label = tk.Label(
-    root,
-    text="",
-    font=("Helvetica", 16),
-    bg="#e8f5e9"
-)
-result_label.pack(pady=20)
+            let material = document.getElementById("materialInput").value.toLowerCase();
+            if (compostList.includes(material)) {
+                document.getElementById("resultText").innerText = "✅ Compostable!";
+            }
+            else if (noncompostList.includes(material)) {
+                document.getElementById("resultText").innerText = "❌ Not Compostable";
+            }
+            else {
+                document.getElementById("resultText").innerText = "⚠️ Item not in database";
+            }
+        }
+        function resetPage() {
+            document.getElementById("materialInput").value = "";
+            document.getElementById("resultText").innerText = "";
+        }
+    </script>
 
-root.mainloop()
+</body>
+<div class="container">
+
+    <h1>Compost Checker🌱</h1>
+    <h2>Enter the material that you're composting:</h2>
+
+    <div>
+        <input type="text" id="materialInput" placeholder="Enter material">
+        <button onclick="checkMaterial()">Check</button>
+        <button onclick="resetPage()">Reset</button>
+    </div>
+    <p id="resultText"></p>
+
+</html>
